@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ficha de Observação Pedagógica</title>
+<meta name="description" content="Um guia prático para observar barreiras, identificar apoios e transformar o que você registra em planejamento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap">
+<style>
+/* Layout: coluna única de leitura, faixas alternadas verde-escuro / off-white, documento "folha de registro" como imagem-tese do hero */
+:root{
+  --verde:#1F3B33;      /* verde escuro da marca */
+  --salvia:#8FA89A;     /* verde sálvia */
+  --salvia-claro:#E3EAE5;
+  --terracota:#B5583A;
+  --off:#F7F5F0;
+  --tinta:#1B2622;
+  --tinta-suave:#4A5A53;
+  --linha:#D5DDD8;
+  --display:"Montserrat", "Segoe UI", Arial, sans-serif;
+  --texto:"Poppins", "Segoe UI", Arial, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--off);color:var(--tinta);font:400 17px/1.65 var(--texto)}
+img{max-width:100%}
+a{color:inherit}
+.faixa{padding-block:64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.faixa.escura{background:var(--verde);color:#F2F5F3}
+.faixa.salvia{background:var(--salvia-claro)}
+.miolo{max-width:1040px;margin:0 auto}
+.leitura{max-width:680px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5.2vw,3.2rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.55rem,3.6vw,2.2rem);font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+.eyebrow{font:600 .78rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--terracota)}
+.escura .eyebrow{color:#E7A487}
+.pilha{display:flex;flex-direction:column;gap:20px}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--terracota);color:#fff;text-decoration:none;font:700 1.05rem/1 var(--display);padding:20px 30px;border-radius:10px;transition:transform .15s,background .15s}
+.cta:hover{background:#9C4A30;transform:translateY(-1px)}
+.cta:focus-visible{outline:3px solid var(--salvia);outline-offset:3px}
+.nota-cta{font-size:.88rem;color:var(--tinta-suave)}
+.escura .nota-cta{color:#C9D6CF}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero > *{min-width:0}
+.hero .sub{font-size:1.15rem;color:var(--tinta-suave);max-width:34em}
+.folha{background:#fff;border:1px solid var(--linha);border-radius:6px;padding:26px 24px;box-shadow:0 18px 40px -22px rgba(31,59,51,.35);transform:rotate(1.2deg);font-size:.9rem}
+.folha .cab{display:flex;justify-content:space-between;gap:12px;font:700 .72rem/1.2 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--verde);border-bottom:2px solid var(--verde);padding-bottom:10px;margin-bottom:14px}
+.campo{border-bottom:1px dashed var(--linha);padding:9px 0;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+.campo b{font:600 .78rem/1.3 var(--display);color:var(--verde);white-space:nowrap}
+.campo span{color:var(--tinta-suave);min-width:0}
+@media (max-width:420px){.campo{grid-template-columns:1fr;gap:2px}}
+.campo .feito{color:var(--terracota);font-weight:600}
+
+/* Dores */
+.dores{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px}
+.dor{background:#fff;border:1px solid var(--linha);border-radius:8px;padding:18px 20px}
+.dor p{color:var(--tinta-suave);font-size:.98rem}
+
+/* Conteúdo do kit */
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px}
+.doc{border-top:4px solid var(--salvia);background:rgba(255,255,255,.06);padding:22px 20px;border-radius:0 0 8px 8px;display:flex;flex-direction:column;gap:10px}
+.doc .sigla{font:800 1.6rem/1 var(--display);color:#fff}
+.doc p{color:#D3DED8;font-size:.97rem}
+.bonus{margin-top:22px;border:1px dashed var(--salvia);border-radius:8px;padding:18px 20px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+.bonus .tag{font:700 .72rem/1 var(--display);letter-spacing:.12em;text-transform:uppercase;background:var(--terracota);color:#fff;padding:6px 10px;border-radius:4px}
+
+/* Fluxo */
+.fluxo{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:passo;margin-top:8px}
+.passo{display:flex;flex-direction:column;gap:8px}
+.passo::before{counter-increment:passo;content:counter(passo);font:800 2.4rem/1 var(--display);color:var(--salvia)}
+.passo p{color:var(--tinta-suave);font-size:.98rem}
+
+/* Para quem */
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.duas > *{min-width:0}
+.lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.lista li{padding-left:28px;position:relative}
+.lista li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:8px;border-left:2.5px solid var(--verde);border-bottom:2.5px solid var(--verde);transform:rotate(-45deg)}
+.lista.nao li::before{border:none;width:14px;height:2.5px;background:var(--terracota);transform:none;top:.75em}
+
+/* Autora */
+.autora{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+.monograma{width:96px;height:96px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font:800 2rem/1 var(--display)}
+
+/* Oferta */
+.oferta{background:#fff;border:2px solid var(--verde);border-radius:12px;padding:36px 30px;max-width:560px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center}
+.preco{font:800 3.2rem/1 var(--display);color:var(--verde);font-variant-numeric:tabular-nums}
+.preco small{font-size:1rem;font-weight:600;color:var(--tinta-suave)}
+.inclui{list-style:none;padding:0;margin:0;text-align:left;display:flex;flex-direction:column;gap:8px;width:100%}
+.inclui li{border-bottom:1px solid var(--linha);padding:8px 0;display:flex;justify-content:space-between;gap:12px}
+.inclui li span:last-child{color:var(--tinta-suave);font-size:.9rem;white-space:nowrap}
+
+/* FAQ */
+details{border-bottom:1px solid var(--linha);padding:18px 0}
+summary{cursor:pointer;font:600 1.02rem/1.4 var(--display);list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--terracota)}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:var(--tinta-suave)}
+summary:focus-visible{outline:2px solid var(--salvia);outline-offset:4px}
+
+.aviso{font-size:.85rem;color:var(--tinta-suave);border-left:3px solid var(--salvia);padding-left:14px}
+footer{padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));text-align:center;font-size:.85rem;color:var(--tinta-suave)}
+
+/* Barra fixa no celular */
+.barra{display:none}
+@media (max-width:760px){
+  body{font-size:16px}
+  .faixa{padding-block:48px}
+  .hero,.duas,.autora{grid-template-columns:1fr}
+  .folha{transform:none}
+  .dores,.docs,.fluxo{grid-template-columns:1fr}
+  .monograma{width:72px;height:72px;font-size:1.5rem}
+  .barra{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--verde);align-items:center;justify-content:space-between;gap:12px;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));color:#fff}
+  .barra .cta{padding:14px 20px;font-size:.95rem}
+  .barra b{font:800 1.2rem/1 var(--display)}
+  footer{padding-bottom:110px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.folha{transform:none}}
+
+.recebe{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.recebe li{background:rgba(255,255,255,.06);border-top:3px solid var(--salvia);padding:18px 20px;border-radius:0 0 8px 8px;color:#D3DED8;font-size:.97rem;min-width:0}
+.recebe li b{display:block;color:#fff;font-family:var(--display);margin-bottom:4px}
+.frase{font:700 clamp(1.3rem,3vw,1.7rem)/1.35 var(--display);color:var(--verde);max-width:30em;text-wrap:balance}
+.prova{display:inline-flex;gap:10px;align-items:baseline;font-size:.95rem;color:var(--tinta-suave)}
+.prova b{font:800 1.5rem/1 var(--display);color:var(--terracota)}
+.voltar{font-size:.9rem}
+.grade{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{background:#fff;border:1px solid var(--linha);border-radius:10px;padding:26px 24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.destaque{grid-column:1/-1;border:2px solid var(--verde)}
+.card .linha{font:700 .72rem/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--salvia)}
+.card p{color:var(--tinta-suave);font-size:.97rem;flex:1}
+.card .rodape{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.card .valor{font:800 1.5rem/1 var(--display);color:var(--verde);font-variant-numeric:tabular-nums}
+.card .cta{padding:14px 20px;font-size:.95rem}
+.secundario{font-size:.9rem;font-weight:600;color:var(--verde)}
+@media (max-width:760px){.recebe,.grade{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section class="faixa">
+  <div class="miolo pilha leitura" style="max-width:760px">
+    <span class="eyebrow">Para professores do AEE</span>
+    <h1>Observe o estudante com critério e chegue ao estudo de caso com evidências</h1>
+    <p class="sub" style="font-size:1.12rem;color:var(--tinta-suave)">Um guia prático para observar barreiras, identificar apoios e transformar o que você registra em planejamento.</p>
+    
+    <div class="pilha" style="gap:10px;align-items:flex-start">
+      <a class="cta" href="https://pay.kiwify.com.br/m4GXN4S">Quero a ficha por R$ 14,90</a>
+      <span class="nota-cta">Acesso imediato após o pagamento. Pix ou cartão.</span>
+    </div>
+  </div>
+</section>
+
+<section class="faixa salvia">
+  <div class="miolo pilha">
+    <span class="eyebrow">O ponto de partida</span>
+    <h2 class="leitura">"Ele não acompanha a turma" não é uma observação</h2>
+    <p class="leitura" style="color:var(--tinta-suave)">Frases amplas como essa aparecem em muitos registros e não ajudam a planejar nada. Falta dizer em que situação, diante de qual atividade, com qual apoio. A ficha organiza a observação em dimensões para que o registro aponte a barreira, e não só a dificuldade do estudante.</p>
+  </div>
+</section>
+
+<section class="faixa escura">
+  <div class="miolo pilha">
+    <span class="eyebrow">O que você recebe</span>
+    <h2 class="leitura">Uma ficha para usar na escola, não para arquivar</h2>
+    <ul class="recebe"><li><b>Ficha de observação por dimensões</b>Campos organizados a partir das dimensões de observação e documentação discutidas na política de Educação Especial.</li><li><b>Barreiras e apoios lado a lado</b>Para registrar o que dificulta e o que já funciona com o estudante.</li><li><b>Do registro ao planejamento</b>Orientações para levar o que foi observado ao estudo de caso e ao plano de atendimento.</li><li><b>Bônus: de conceitos amplos à observação prática</b>Exemplos de como transformar situações do cotidiano escolar em observações concretas.</li></ul>
+  </div>
+</section>
+
+
+
+<section class="faixa">
+  <div class="miolo duas">
+    <div class="pilha"><h2>É para você se</h2><ul class="lista"><li>Atua no AEE ou acompanha estudantes da educação especial</li><li>Sente que seus registros ficam genéricos</li><li>Vai preencher estudos de caso neste semestre</li></ul></div>
+    <div class="pilha"><h2>Não é para você se</h2><ul class="lista nao"><li>Procura um modelo de estudo de caso completo (para isso, veja o <a href="landing-kit-estudo-de-caso.html">Kit Estudo de Caso + PAEE + PEI</a>)</li><li>Precisa de um formulário oficial da sua rede</li></ul></div>
+  </div>
+</section>
+
+<section class="faixa salvia">
+  <div class="miolo autora">
+    <div class="monograma" aria-hidden="true">KB</div>
+    <div class="pilha leitura">
+      <span class="eyebrow">Quem fez</span>
+      <h2>Kelly Baldan</h2>
+      <p>Professora de apoio e acompanhamento à inclusão na rede pública de São Paulo, doutoranda na UNIFESP e autora de <i>Vai dar tudo certo</i>, dissertação premiada como melhor do programa em 2024. A ficha saiu das formações com professores do AEE, onde a dúvida mais frequente é o que, afinal, deve ser observado.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faixa" id="oferta">
+  <div class="miolo">
+    <div class="oferta">
+      <span class="eyebrow">Ficha de Observação Pedagógica</span>
+      <ul class="inclui"><li><span>Ficha de Observação Pedagógica</span><span>incluso</span></li><li><span>Orientações de uso</span><span>incluso</span></li><li><span>Bônus: de conceitos amplos à observação prática</span><span>incluso</span></li></ul>
+      <div class="preco">R$ 14,90 <small>pagamento único</small></div>
+      <a class="cta" href="https://pay.kiwify.com.br/m4GXN4S">Quero a ficha</a>
+      <span class="nota-cta">Compra processada pela Kiwify. Garantia de 7 dias.</span>
+    </div>
+  </div>
+</section>
+
+<section class="faixa salvia">
+  <div class="miolo leitura pilha" style="gap:0">
+    <h2 style="margin-bottom:12px">Perguntas frequentes</h2>
+    <details><summary>Como recebo o material?</summary><p>Depois que o pagamento é aprovado, a Kiwify envia o acesso para o seu e-mail. No Pix, a liberação costuma ser imediata.</p></details><details><summary>Posso imprimir?</summary><p>Pode. A ficha foi pensada para ser usada no papel, durante a observação, ou preenchida no computador depois.</p></details><details><summary>A ficha é o estudo de caso?</summary><p>Não. Ela organiza a observação que alimenta o estudo de caso. Se você quer os modelos de Estudo de Caso, PAEE e PEI, eles estão no Kit.</p></details><details><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia pela Kiwify e pede o reembolso pela própria plataforma.</p></details>
+    <p class="aviso" style="margin-top:28px">Material autoral de apoio pedagógico. Não substitui formulários, documentos ou orientações oficiais estabelecidos pela rede de ensino em que você atua.</p>
+  </div>
+</section>
+
+<footer><a class="voltar" href="index.html">Ver todos os materiais</a> · Kelly Baldan · <a href="https://www.instagram.com/baldan_kelly/">@baldan_kelly</a></footer>
+<div class="barra">
+  <div><b>R$ 14,90</b><br><span style="font-size:.8rem;opacity:.8">Ficha de Observação Pedagógica</span></div>
+  <a class="cta" href="https://pay.kiwify.com.br/m4GXN4S">Comprar</a>
+</div>
+</body>
+</html>

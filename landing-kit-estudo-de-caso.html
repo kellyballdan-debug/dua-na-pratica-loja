@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kit Estudo de Caso, PAEE e PEI</title>
+<meta name="description" content="Modelos editáveis de Estudo de Caso, PAEE e PEI para o professor do AEE, organizados a partir das orientações atuais da Educação Especial Inclusiva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500;600&display=swap">
+<style>
+/* Layout: coluna única de leitura, faixas alternadas verde-escuro / off-white, documento "folha de registro" como imagem-tese do hero */
+:root{
+  --verde:#1F3B33;      /* verde escuro da marca */
+  --salvia:#8FA89A;     /* verde sálvia */
+  --salvia-claro:#E3EAE5;
+  --terracota:#B5583A;
+  --off:#F7F5F0;
+  --tinta:#1B2622;
+  --tinta-suave:#4A5A53;
+  --linha:#D5DDD8;
+  --display:"Montserrat", "Segoe UI", Arial, sans-serif;
+  --texto:"Poppins", "Segoe UI", Arial, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--off);color:var(--tinta);font:400 17px/1.65 var(--texto)}
+img{max-width:100%}
+a{color:inherit}
+.faixa{padding-block:64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.faixa.escura{background:var(--verde);color:#F2F5F3}
+.faixa.salvia{background:var(--salvia-claro)}
+.miolo{max-width:1040px;margin:0 auto}
+.leitura{max-width:680px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5.2vw,3.2rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.55rem,3.6vw,2.2rem);font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+.eyebrow{font:600 .78rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--terracota)}
+.escura .eyebrow{color:#E7A487}
+.pilha{display:flex;flex-direction:column;gap:20px}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--terracota);color:#fff;text-decoration:none;font:700 1.05rem/1 var(--display);padding:20px 30px;border-radius:10px;transition:transform .15s,background .15s}
+.cta:hover{background:#9C4A30;transform:translateY(-1px)}
+.cta:focus-visible{outline:3px solid var(--salvia);outline-offset:3px}
+.nota-cta{font-size:.88rem;color:var(--tinta-suave)}
+.escura .nota-cta{color:#C9D6CF}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero > *{min-width:0}
+.hero .sub{font-size:1.15rem;color:var(--tinta-suave);max-width:34em}
+.folha{background:#fff;border:1px solid var(--linha);border-radius:6px;padding:26px 24px;box-shadow:0 18px 40px -22px rgba(31,59,51,.35);transform:rotate(1.2deg);font-size:.9rem}
+.folha .cab{display:flex;justify-content:space-between;gap:12px;font:700 .72rem/1.2 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--verde);border-bottom:2px solid var(--verde);padding-bottom:10px;margin-bottom:14px}
+.campo{border-bottom:1px dashed var(--linha);padding:9px 0;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+.campo b{font:600 .78rem/1.3 var(--display);color:var(--verde);white-space:nowrap}
+.campo span{color:var(--tinta-suave);min-width:0}
+@media (max-width:420px){.campo{grid-template-columns:1fr;gap:2px}}
+.campo .feito{color:var(--terracota);font-weight:600}
+
+/* Dores */
+.dores{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px}
+.dor{background:#fff;border:1px solid var(--linha);border-radius:8px;padding:18px 20px}
+.dor p{color:var(--tinta-suave);font-size:.98rem}
+
+/* Conteúdo do kit */
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px}
+.doc{border-top:4px solid var(--salvia);background:rgba(255,255,255,.06);padding:22px 20px;border-radius:0 0 8px 8px;display:flex;flex-direction:column;gap:10px}
+.doc .sigla{font:800 1.6rem/1 var(--display);color:#fff}
+.doc p{color:#D3DED8;font-size:.97rem}
+.bonus{margin-top:22px;border:1px dashed var(--salvia);border-radius:8px;padding:18px 20px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+.bonus .tag{font:700 .72rem/1 var(--display);letter-spacing:.12em;text-transform:uppercase;background:var(--terracota);color:#fff;padding:6px 10px;border-radius:4px}
+
+/* Fluxo */
+.fluxo{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:passo;margin-top:8px}
+.passo{display:flex;flex-direction:column;gap:8px}
+.passo::before{counter-increment:passo;content:counter(passo);font:800 2.4rem/1 var(--display);color:var(--salvia)}
+.passo p{color:var(--tinta-suave);font-size:.98rem}
+
+/* Para quem */
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.duas > *{min-width:0}
+.lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.lista li{padding-left:28px;position:relative}
+.lista li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:8px;border-left:2.5px solid var(--verde);border-bottom:2.5px solid var(--verde);transform:rotate(-45deg)}
+.lista.nao li::before{border:none;width:14px;height:2.5px;background:var(--terracota);transform:none;top:.75em}
+
+/* Autora */
+.autora{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start}
+.monograma{width:96px;height:96px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font:800 2rem/1 var(--display)}
+
+/* Oferta */
+.oferta{background:#fff;border:2px solid var(--verde);border-radius:12px;padding:36px 30px;max-width:560px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center}
+.preco{font:800 3.2rem/1 var(--display);color:var(--verde);font-variant-numeric:tabular-nums}
+.preco small{font-size:1rem;font-weight:600;color:var(--tinta-suave)}
+.inclui{list-style:none;padding:0;margin:0;text-align:left;display:flex;flex-direction:column;gap:8px;width:100%}
+.inclui li{border-bottom:1px solid var(--linha);padding:8px 0;display:flex;justify-content:space-between;gap:12px}
+.inclui li span:last-child{color:var(--tinta-suave);font-size:.9rem;white-space:nowrap}
+
+/* FAQ */
+details{border-bottom:1px solid var(--linha);padding:18px 0}
+summary{cursor:pointer;font:600 1.02rem/1.4 var(--display);list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--terracota)}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:var(--tinta-suave)}
+summary:focus-visible{outline:2px solid var(--salvia);outline-offset:4px}
+
+.aviso{font-size:.85rem;color:var(--tinta-suave);border-left:3px solid var(--salvia);padding-left:14px}
+footer{padding-block:32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));text-align:center;font-size:.85rem;color:var(--tinta-suave)}
+
+/* Barra fixa no celular */
+.barra{display:none}
+@media (max-width:760px){
+  body{font-size:16px}
+  .faixa{padding-block:48px}
+  .hero,.duas,.autora{grid-template-columns:1fr}
+  .folha{transform:none}
+  .dores,.docs,.fluxo{grid-template-columns:1fr}
+  .monograma{width:72px;height:72px;font-size:1.5rem}
+  .barra{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--verde);align-items:center;justify-content:space-between;gap:12px;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));color:#fff}
+  .barra .cta{padding:14px 20px;font-size:.95rem}
+  .barra b{font:800 1.2rem/1 var(--display)}
+  footer{padding-bottom:110px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.folha{transform:none}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="faixa">
+  <div class="miolo hero">
+    <div class="pilha">
+      <span class="eyebrow">Para professores do AEE</span>
+      <h1>Estudo de Caso, PAEE e PEI prontos para preencher, sem começar do zero</h1>
+      <p class="sub">Modelos editáveis organizados a partir das orientações atuais da Educação Especial Inclusiva. Você entra com o que observou do estudante. A estrutura do documento já está pronta.</p>
+      <div class="pilha" style="gap:10px">
+        <a class="cta" href="https://pay.kiwify.com.br/hON6lT6">Quero o kit por R$ 27,90</a>
+        <span class="nota-cta">Acesso imediato após o pagamento. Pix ou cartão.</span>
+      </div>
+    </div>
+    <div class="folha" aria-hidden="true">
+      <div class="cab"><span>Estudo de Caso</span><span>AEE</span></div>
+      <div class="campo"><b>Estudante</b><span>__________________</span></div>
+      <div class="campo"><b>Barreiras observadas</b><span class="feito">comunicação, acesso ao currículo</span></div>
+      <div class="campo"><b>Potencialidades</b><span>interesse por música, memória visual</span></div>
+      <div class="campo"><b>Recursos e apoios</b><span>pranchas, rotina visual</span></div>
+      <div class="campo"><b>Encaminhamento</b><span class="feito">→ PAEE</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DOR -->
+<section class="faixa salvia">
+  <div class="miolo pilha">
+    <span class="eyebrow">Se você é do AEE, conhece este cenário</span>
+    <h2 class="leitura">A documentação mudou, o prazo continua o mesmo e cada escola pede de um jeito</h2>
+    <div class="dores">
+      <div class="dor"><h3>O documento em branco</h3><p>Você sabe o que observou no estudante, mas trava na hora de transformar isso em texto de estudo de caso.</p></div>
+      <div class="dor"><h3>Três documentos que se repetem</h3><p>Estudo de Caso, PAEE e PEI pedem informações parecidas. Sem um fio entre eles, você reescreve tudo três vezes.</p></div>
+      <div class="dor"><h3>A dúvida sobre o que mudou</h3><p>Com as novas orientações, fica a pergunta: o modelo que eu uso ainda está certo?</p></div>
+      <div class="dor"><h3>Registro que não vira plano</h3><p>O estudo de caso fica pronto e arquivado, mas não orienta o atendimento da semana seguinte.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE TEM -->
+<section class="faixa escura">
+  <div class="miolo pilha">
+    <span class="eyebrow">O que vem no kit</span>
+    <h2 class="leitura">Três modelos editáveis em Word que conversam entre si</h2>
+    <div class="docs">
+      <div class="doc"><span class="sigla">Estudo de Caso</span><p>Roteiro para registrar barreiras, potencialidades e necessidades de apoio a partir do que você observa no contexto escolar.</p></div>
+      <div class="doc"><span class="sigla">PAEE</span><p>Plano de Atendimento Educacional Especializado com objetivos, recursos, frequência e formas de acompanhamento.</p></div>
+      <div class="doc"><span class="sigla">PEI</span><p>Plano Educacional Individualizado para alinhar com o professor da sala comum o que muda no planejamento da turma.</p></div>
+    </div>
+    <div class="bonus">
+      <span class="tag">Bônus</span>
+      <p><b>Guia Prático de Estudo de Caso e Plano do AEE.</b> O passo a passo para preencher cada campo, com orientações sobre o que escrever e o que evitar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMO USA -->
+<section class="faixa">
+  <div class="miolo pilha">
+    <span class="eyebrow">Como você usa</span>
+    <h2 class="leitura">Do que você observou ao plano de atendimento</h2>
+    <div class="fluxo">
+      <div class="passo"><h3>Observe e registre</h3><p>Preencha o Estudo de Caso com o que viu do estudante na escola: barreiras, interesses, apoios que já funcionam.</p></div>
+      <div class="passo"><h3>Planeje o atendimento</h3><p>Leve as informações para o PAEE. Os campos seguem a mesma lógica, então você aproveita o que já escreveu.</p></div>
+      <div class="passo"><h3>Converse com a sala comum</h3><p>Use o PEI como ponto de partida da conversa com o professor da turma sobre ajustes no planejamento.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="faixa salvia">
+  <div class="miolo duas">
+    <div class="pilha">
+      <h2>É para você se</h2>
+      <ul class="lista">
+        <li>Atua no AEE ou na sala de recursos multifuncionais</li>
+        <li>Precisa entregar estudo de caso e plano de atendimento neste semestre</li>
+        <li>Quer um modelo organizado para adaptar à realidade da sua escola</li>
+        <li>Coordena ou acompanha a documentação da educação especial</li>
+      </ul>
+    </div>
+    <div class="pilha">
+      <h2>Não é para você se</h2>
+      <ul class="lista nao">
+        <li>Sua rede exige um formulário próprio e não aceita adaptações</li>
+        <li>Procura um curso teórico sobre legislação</li>
+        <li>Espera um documento já preenchido para copiar</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- AUTORA -->
+<section class="faixa">
+  <div class="miolo autora">
+    <div class="monograma" aria-hidden="true">KB</div>
+    <div class="pilha leitura">
+      <span class="eyebrow">Quem organizou</span>
+      <h2>Kelly Baldan</h2>
+      <p>Professora de apoio e acompanhamento à inclusão na rede pública de São Paulo, doutoranda na UNIFESP e autora de <i>Vai dar tudo certo</i>, dissertação premiada como melhor do programa em 2024. No dia a dia, acompanho professores do AEE que lidam exatamente com esses documentos. O kit nasceu dessas conversas.</p>
+      <p class="nota-cta">No Instagram: <a href="https://www.instagram.com/baldan_kelly/">@baldan_kelly</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA -->
+<section class="faixa salvia" id="oferta">
+  <div class="miolo">
+    <div class="oferta">
+      <span class="eyebrow">Kit completo</span>
+      <ul class="inclui">
+        <li><span>Modelo de Estudo de Caso (Word)</span><span>incluso</span></li>
+        <li><span>Modelo de PAEE (Word)</span><span>incluso</span></li>
+        <li><span>Modelo de PEI (Word)</span><span>incluso</span></li>
+        <li><span>Bônus: Guia Prático de Estudo de Caso</span><span>incluso</span></li>
+      </ul>
+      <div class="preco">R$ 27,90 <small>pagamento único</small></div>
+      <a class="cta" href="https://pay.kiwify.com.br/hON6lT6">Quero o kit agora</a>
+      <span class="nota-cta">Compra processada pela Kiwify. Garantia de 7 dias.</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faixa">
+  <div class="miolo leitura pilha" style="gap:0">
+    <h2 style="margin-bottom:12px">Perguntas frequentes</h2>
+    <details><summary>Como recebo o material?</summary><p>Depois que o pagamento é aprovado, a Kiwify envia o acesso para o seu e-mail. No Pix, a liberação costuma ser imediata.</p></details>
+    <details><summary>Consigo editar os modelos?</summary><p>Sim. Os três modelos vêm em Word (.docx), para você adaptar os campos à sua escola e ao estudante.</p></details>
+    <details><summary>O kit substitui o formulário da minha rede?</summary><p>Não. É um material autoral de apoio pedagógico. Se a sua rede tem um formulário oficial, use o kit para organizar as informações antes de passar para ele.</p></details>
+    <details><summary>Serve para qualquer etapa de ensino?</summary><p>Os modelos foram pensados para o AEE na educação básica e podem ser ajustados para educação infantil, fundamental e médio.</p></details>
+    <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia pela Kiwify. Pede o reembolso pela própria plataforma.</p></details>
+  </div>
+</section>
+
+<section class="faixa salvia">
+  <div class="miolo leitura">
+    <p class="aviso">Material autoral de apoio pedagógico. Não substitui formulários, documentos ou orientações oficiais estabelecidos pela rede de ensino em que você atua.</p>
+  </div>
+</section>
+
+<footer><a href="index.html">Ver todos os materiais</a> · Kelly Baldan · <a href="https://www.instagram.com/baldan_kelly/">@baldan_kelly</a></footer>
+
+<div class="barra">
+  <div><b>R$ 27,90</b><br><span style="font-size:.8rem;opacity:.8">Kit Estudo de Caso + PAEE + PEI</span></div>
+  <a class="cta" href="https://pay.kiwify.com.br/hON6lT6">Quero o kit</a>
+</div>
+
+</body>
+</html>
